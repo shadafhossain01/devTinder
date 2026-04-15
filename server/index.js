@@ -2,7 +2,11 @@ const express = require("express");
 require("dotenv").config();
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
-const dbConnect= require("./src/config/db")
+const dbConnect= require("./src/config/db");
+const  authRoute  = require("./src/routes/auth.route");
+const  profileRoute  = require("./src/routes/profile.route");
+const  requestRoute  = require("./src/routes/request.route");
+const  userRoute  = require("./src/routes/user.route");
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -15,6 +19,12 @@ app.use(cors())
 app.use(express.static("public"))
 app.use(express.json())
 app.use(cookieParser())
+
+// routes
+app.use("/", authRoute);
+app.use("/profile", profileRoute);
+app.use("/request", requestRoute);
+app.use("/user", userRoute);
 
 app.listen(port, () => {
   console.log(`Server listening on port ${port}`);
