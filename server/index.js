@@ -15,7 +15,12 @@ const port = process.env.PORT || 3000;
 dbConnect()
 
 // middlewares
-app.use(cors())
+app.use(
+  cors({
+    origin: process.env.FRONTEND_URL,
+    credentials:true
+  }),
+);
 app.use(express.static("public"))
 app.use(express.json())
 app.use(cookieParser())
